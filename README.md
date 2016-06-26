@@ -6,8 +6,18 @@ This module is written as an effort to provide python bindings to the EtherScan.
 https://etherscan.io/apis
 In order to use this, you must attain an Etherscan user account, and generate an API key.
 
-The API variable name `key` needs to be stored in a file named `api_key.py` in the base module directory.  This will be
-sorted out to be more user friendly later.
+In order to use the API, you must provide an API key at runtime, which can be found at the Etherscan.io API website.
+If you'd like to use the provided examples without altering them, then the JSON file `api_key.json` must be stored in
+the base directory.  Its format is as follows:
+
+    { "key" : "YourApiKeyToken" }
+    
+with `YourApiKeyToken` is your provided API key token from EtherScan.io
+
+## Installation
+To install the package to your computer, simply run the following command in the base directory:
+
+    python setup.py install
 
 ## Available bindings
 Currently, only the following Etherscan.io API modules are available:
@@ -23,6 +33,8 @@ All possible calls have an associated example file in the examples folder to sho
 
 These of course will be fleshed out with more details and explanation in time
 
+Jupyter notebooks area also included in each directory to show all examples
+
 ## TODO:
 
 - Package and submit to PyPI
@@ -32,9 +44,8 @@ These of course will be fleshed out with more details and explanation in time
     - websockets
 - Add robust documentation
 - Add unit test suite
-- Add requests.session as a connection option
-    - include request throttling based on Etherscan's suggestions
-- jupyter notebook examples
+- Add request throttling based on Etherscan's suggestions
+
 
 ## Holla at ya' boy
 BTC: 16Ny72US78VEjL5GUinSAavDwARb8dXWKG

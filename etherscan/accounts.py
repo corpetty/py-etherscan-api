@@ -1,23 +1,22 @@
 from .client import Client
-import json
 import re
 
 
 class Account(Client):
-    def __init__(self, address=Client.dao_address):
-        Client.__init__(self, address=address)
-        self.module += 'account'
+    def __init__(self, address=Client.dao_address, api_key='YourApiKeyToken'):
+        Client.__init__(self, address=address, api_key=api_key)
+        self.module = self.URL_BASES['module'] + 'account'
 
     def make_url(self, call_type=''):
         if call_type == 'balance':
-            self.url = self.prefix \
+            self.url = self.URL_BASES['prefix'] \
                 + self.module \
                 + self.action \
                 + self.address \
                 + self.tag \
                 + self.key
         elif call_type == 'transactions':
-            self.url = self.prefix \
+            self.url = self.URL_BASES['prefix'] \
                 + self.module \
                 + self.action \
                 + self.address \
@@ -25,7 +24,7 @@ class Account(Client):
                 + self.page \
                 + self.key
         elif call_type == 'blocks':
-            self.url = self.prefix \
+            self.url = self.URL_BASES['prefix'] \
                 + self.module \
                 + self.action \
                 + self.address \
@@ -35,24 +34,18 @@ class Account(Client):
                 + self.key
 
     def get_balance(self):
-        self.action += 'balance'
-        self.tag += 'latest'
-        self.make_url()
+        self.action = self.URL_BASES['action'] + 'balance'
+        self.tag = self.URL_BASES['tag'] + 'latest'
+        self.make_url(call_type='transactions')
         req = self.connect()
-        if req.status_code == 200:
-            return json.loads(req.text)['result']
-        else:
-            return req.status_code
+        return req['result']
 
     def get_balance_multiple(self):
-        self.action += 'balancemulti'
-        self.tag += 'latest'
+        self.action = self.URL_BASES['action'] + 'balancemulti'
+        self.tag = self.URL_BASES['tag'] + 'latest'
         self.make_url(call_type='balance')
         req = self.connect()
-        if req.status_code == 200:
-            return json.loads(req.text)['result']
-        else:
-            return req.status_code
+        return req['result']
 
     def get_transaction_page(self, page=1, offset=10000, sort='asc') -> list:
         """
@@ -80,37 +73,35 @@ class Account(Client):
             'asc' -> ascending order
             'des' -> descending order
         """
-        self.action += 'txlist'
-        self.page += str(page)
-        self.offset += str(offset)
-        self.sort += sort
+        self.action = self.URL_BASES['action'] + 'txlist'
+        self.page = self.URL_BASES['page'] + str(page)
+        self.offset = self.URL_BASES['offset'] + str(offset)
+        self.sort = self.URL_BASES['sort'] + sort
         self.make_url(call_type='transactions')
         req = self.connect()
-        if req.status_code == 200:
-            return json.loads(req.text)['result']
-        else:
-            return req.status_code
+        return req['result']
 
     def get_all_transactions(self, offset=10000, sort='asc') -> list:
-        self.action += 'txlist'
-        self.page += str(1)
-        self.offset += str(offset)
-        self.sort += sort
+        self.action = self.URL_BASES['action'] + 'txlist'
+        self.page = self.URL_BASES['page'] + str(1)
+        self.offset = self.URL_BASES['offset'] + str(offset)
+        self.sort = self.URL_BASES['sort'] + sort
         self.make_url(call_type='transactions')
 
         trans_list = []
         while True:
             self.make_url(call_type='transactions')
             req = self.connect()
-            if "No transactions found" in json.loads(req.text)['message']:
+            if "No transactions found" in req['message']:
                 print("Total number of transactions: {}".format(len(trans_list)))
+                self.page = ''
                 return trans_list
             else:
-                trans_list += json.loads(req.text)['result']
+                trans_list += req['result']
                 # Find any character block that is a integer of any length
                 page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.page)
                 print("page {} added".format(page_number[0]))
-                self.page = self.page[:6] + str(int(page_number[0]) + 1)
+                self.page = self.URL_BASES['page'] + str(int(page_number[0]) + 1)
 
     def get_blocks_mined_page(self, blocktype='blocks', page=1, offset=10000) -> list:
         """
@@ -123,36 +114,33 @@ class Account(Client):
             'blocks' -> full blocks only
             'uncles' -> uncles only
         """
-        self.action += 'getminedblocks'
-        self.blocktype += blocktype
-        self.page += str(page)
-        self.offset += str(offset)
+        self.action = self.URL_BASES['action'] + 'getminedblocks'
+        self.blocktype = self.URL_BASES['blocktype'] + blocktype
+        self.page = self.URL_BASES['page'] + str(page)
+        self.offset = self.URL_BASES['offset'] + str(offset)
         self.make_url(call_type='blocks')
         req = self.connect()
-        if req.status_code == 200:
-            return json.loads(req.text)['result']
-        else:
-            return req.status_code
+        return req['result']
 
     def get_all_blocks_mined(self, blocktype='blocks', offset=10000) -> list:
-        self.action += 'getminedblocks'
-        self.blocktype += blocktype
-        self.page += str(1)
-        self.offset += str(offset)
+        self.action = self.URL_BASES['action'] + 'getminedblocks'
+        self.blocktype = self.URL_BASES['blocktype'] + blocktype
+        self.page = self.URL_BASES['page'] + str(1)
+        self.offset = self.URL_BASES['offset'] + str(offset)
         blocks_list = []
         while True:
             self.make_url(call_type='blocks')
             req = self.connect()
-            print(json.loads(req.text)['message'])
-            if "No transactions found" in json.loads(req.text)['message']:
+            print(req['message'])
+            if "No transactions found" in req['message']:
                 print("Total number of blocks mined: {}".format(len(blocks_list)))
                 return blocks_list
             else:
-                blocks_list += json.loads(req.text)['result']
+                blocks_list += req['result']
                 # Find any character block that is a integer of any length
                 page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.page)
                 print("page {} added".format(page_number[0]))
-                self.page = self.page[:6] + str(int(page_number[0]) + 1)
+                self.page = self.URL_BASES['page'] + str(int(page_number[0]) + 1)
 
     def update_transactions(self, address, trans):
         """

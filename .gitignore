@@ -1,6 +1,6 @@
-/api_key.py
+/api_key.json
 # Created by .ignore support plugin (hsz.mobi)
 ### IPythonNotebook template
 # Temporary data
 .ipynb_checkpoints/
-
+/examples/stats/.ipynb_checkpoints
