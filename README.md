@@ -1,4 +1,4 @@
-# py_etherscan_api module
+# py-etherscan-api module
 EtherScan.io API python bindings
 
 ## Description
@@ -49,4 +49,5 @@ Jupyter notebooks area also included in each directory to show all examples
 
 ## Holla at ya' boy
 BTC: 16Ny72US78VEjL5GUinSAavDwARb8dXWKG
+
 ETH: 0x5E8047fc033499BD5d8C463ADb29f10f11165ed0
