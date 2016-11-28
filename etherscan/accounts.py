@@ -3,7 +3,7 @@ import re
 
 
 class Account(Client):
-    def __init__(self, address=Client.dao_address, api_key='YourApiKeyToken'):
+    def __init__(self, address=Client.dao_address, api_key='KMK786MB5AZYQSFS5CW3JQ9AAW4DCX3AX4'):
         Client.__init__(self, address=address, api_key=api_key)
         self.module = self.URL_BASES['module'] + 'account'
 
