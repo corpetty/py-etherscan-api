@@ -47,7 +47,7 @@ class Account(Client):
         req = self.connect()
         return req['result']
 
-    def get_transaction_page(self, page=1, offset=10000, sort='asc') -> list:
+    def get_transaction_page(self, page=1, offset=10000, sort='asc', internal=False) -> list:
         """
         Get a page of transactions, each transaction returns list of dict with keys:
             nonce
@@ -72,8 +72,15 @@ class Account(Client):
         sort options:
             'asc' -> ascending order
             'des' -> descending order
+
+        internal options:
+            True  -> Gets the internal transactions of a smart contract
+            False -> (default) get normal external transactions
         """
-        self.action = self.URL_BASES['action'] + 'txlist'
+        if internal:
+            self.action = self.URL_BASES['action'] + 'txlistinternal'
+        else:
+            self.action = self.URL_BASES['action'] + 'txlist'
         self.page = self.URL_BASES['page'] + str(page)
         self.offset = self.URL_BASES['offset'] + str(offset)
         self.sort = self.URL_BASES['sort'] + sort
@@ -81,8 +88,11 @@ class Account(Client):
         req = self.connect()
         return req['result']
 
-    def get_all_transactions(self, offset=10000, sort='asc') -> list:
-        self.action = self.URL_BASES['action'] + 'txlist'
+    def get_all_transactions(self, offset=10000, sort='asc', internal=False) -> list:
+        if internal:
+            self.action = self.URL_BASES['action'] + 'txlistinternal'
+        else:
+            self.action = self.URL_BASES['action'] + 'txlist'
         self.page = self.URL_BASES['page'] + str(1)
         self.offset = self.URL_BASES['offset'] + str(offset)
         self.sort = self.URL_BASES['sort'] + sort
@@ -141,6 +151,13 @@ class Account(Client):
                 page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.page)
                 print("page {} added".format(page_number[0]))
                 self.page = self.URL_BASES['page'] + str(int(page_number[0]) + 1)
+
+    def get_internal_by_hash(self, tx_hash=''):
+        """
+        Currently not implemented
+        :return:
+        """
+        pass
 
     def update_transactions(self, address, trans):
         """
