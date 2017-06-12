@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42a3ea58-8607-4d87-88f7-438047d6dd57" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etherscan/contracts.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/contracts/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/contracts/get_abi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/py-etherscan-api.iml" afterPath="$PROJECT_DIR$/.idea/py-etherscan-api.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etherscan/accounts.py" afterPath="$PROJECT_DIR$/etherscan/accounts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/accounts/Accounts Examples Notebook.ipynb" afterPath="$PROJECT_DIR$/examples/accounts/Accounts Examples Notebook.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/accounts/get_all_transactions.py" afterPath="$PROJECT_DIR$/examples/accounts/get_all_transactions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
     </list>
     <ignored path="Etherscan_py.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,7 +46,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_abi.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_abi.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/contracts/get_abi.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -120,7 +113,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
@@ -185,7 +178,6 @@
         <option value="$PROJECT_DIR$/etherscan/tokens.py" />
         <option value="$PROJECT_DIR$/etherscan/client.py" />
         <option value="$PROJECT_DIR$/etherscan/stats.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/changelog.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/examples/accounts/get_all_transactions.py" />
@@ -193,6 +185,7 @@
         <option value="$PROJECT_DIR$/etherscan/contracts.py" />
         <option value="$PROJECT_DIR$/examples/contracts/get_abi.py" />
         <option value="$PROJECT_DIR$/examples/accounts/Accounts Examples Notebook.ipynb" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -225,6 +218,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -292,7 +286,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -641,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1466966347262</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Patch to 0.7.0&#10;&#10;- added internal transactions and examples">
+      <created>1497300093724</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1497300093724</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -711,7 +711,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Patch to 0.6.0&#10;&#10;- Changed http to requests.session() to increase speed of consecutive calls&#10;- added setup.py for installation&#10;- added jupyter notebooks for all examples&#10;- fixed a big regarding Account.get_balance()&#10;- changed URL creation methodology to reflect base names of API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Patch to 0.6.0&#10;&#10;- Changed http to requests.session() to increase speed of consecutive calls&#10;- added setup.py for installation&#10;- added jupyter notebooks for all examples&#10;- fixed a big regarding Account.get_balance()&#10;- changed URL creation methodology to reflect base names of API" />
+    <MESSAGE value="Patch to 0.7.0&#10;&#10;- added internal transactions and examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="Patch to 0.7.0&#10;&#10;- added internal transactions and examples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
