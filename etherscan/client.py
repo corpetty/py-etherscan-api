@@ -47,7 +47,12 @@ class Client(object):
         except requests.exceptions.ConnectionError:
             return "Connection refused"
         if req.status_code == 200:
-            return json.loads(req.text)
+            # Check for empty response
+            if req.text:
+                return json.loads(req.text)
+            else:
+                print("Invalid Request")
+                exit()
         else:
             print("problem with connection, status code: ", req.status_code)
             exit()
