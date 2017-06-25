@@ -4,3 +4,4 @@
 # Temporary data
 .ipynb_checkpoints/
 /examples/stats/.ipynb_checkpoints
+/.cache/
