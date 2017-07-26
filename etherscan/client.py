@@ -75,8 +75,8 @@ class Client(object):
             self.url_dict[self.ADDRESS] = address
 
     def build_url(self):
-        self.url = self.PREFIX + ''.join([k + v if v else '' for k, v in self.url_dict.items()])  # TODO: better naming
-
+        self.url = self.PREFIX + ''.join([param + val if val else '' for param, val in self.url_dict.items()])  # TODO: better naming
+        print(self.url)
     def connect(self):
         # TODO: deal with "unknown exception" error
         try:
