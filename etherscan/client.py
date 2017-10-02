@@ -37,30 +37,30 @@ class Client(object):
 
     def __init__(self, address, api_key=''):
         self.http = requests.session()
-        self.url_dict = collections.OrderedDict(
-            {
-                self.MODULE: '',
-                self.ADDRESS: '',
-                self.OFFSET: '',
-                self.PAGE: '',
-                self.SORT: '',
-                self.BLOCK_TYPE: '',
-                self.TO: '',
-                self.VALUE: '',
-                self.DATA: '',
-                self.POSITION: '',
-                self.HEX: '',
-                self.GAS_PRICE: '',
-                self.GAS: '',
-                self.START_BLOCK: '',
-                self.END_BLOCK: '',
-                self.BLOCKNO: '',
-                self.TXHASH: '',
-                self.TAG: '',
-                self.BOOLEAN: '',
-                self.INDEX: '',
-                self.API_KEY: api_key,
-            })
+        self.url_dict = collections.OrderedDict([
+
+            (self.MODULE, ''),
+            (self.ADDRESS, ''),
+            (self.OFFSET, ''),
+            (self.PAGE, ''),
+            (self.SORT, ''),
+            (self.BLOCK_TYPE, ''),
+            (self.TO, ''),
+            (self.VALUE, ''),
+            (self.DATA, ''),
+            (self.POSITION, ''),
+            (self.HEX, ''),
+            (self.GAS_PRICE, ''),
+            (self.GAS, ''),
+            (self.START_BLOCK, ''),
+            (self.END_BLOCK, ''),
+            (self.BLOCKNO, ''),
+            (self.TXHASH, ''),
+            (self.TAG, ''),
+            (self.BOOLEAN, ''),
+            (self.INDEX, ''),
+            (self.API_KEY, api_key)]
+        )
 
         # self.url_dict[API_KEY] = str(api_key)
         self.check_and_get_api()
