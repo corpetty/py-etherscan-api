@@ -5,3 +5,6 @@
 .ipynb_checkpoints/
 /examples/stats/.ipynb_checkpoints
 /.cache/
+.idea
+/__pycache__/
+
