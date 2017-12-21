@@ -82,7 +82,9 @@ class Client(object):
         try:
             req = self.http.get(self.url)
         except requests.exceptions.ConnectionError:
-            return "Connection refused"
+            print("Connection refused")
+            exit()
+            
         if req.status_code == 200:
             # Check for empty response
             if req.text:
