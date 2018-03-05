@@ -1,5 +1,34 @@
-import requests
+# coding: utf-8
 import collections
+
+import requests
+
+
+class ClientException(Exception):
+    """Unhandled API client exception"""
+    message = 'unhandled error'
+
+    def __init__(self, message=None):
+        if message is not None:
+            self.message = message
+
+    def __unicode__(self):
+        return u'<Err: {0.message}>'.format(self)
+
+    __str__ = __unicode__
+
+
+class ConnectionRefused(ClientException):
+    """Connection refused by remote host"""
+
+
+class EmptyResponse(ClientException):
+    """Empty response from API"""
+
+
+class BadRequest(ClientException):
+    """Invalid request passed"""
+
 
 #  Assume user puts his API key in the api_key.json file under variable name "key"
 class Client(object):
@@ -65,8 +94,7 @@ class Client(object):
         # self.key = self.URL_BASES['key'] + self.API_KEY
 
         if (len(address) > 20) and (type(address) == list):
-            print("Etherscan only takes 20 addresses at a time")
-            quit()
+            raise BadRequest("Etherscan only takes 20 addresses at a time")
         elif (type(address) == list) and (len(address) <= 20):
             self.url_dict[self.ADDRESS] = ','.join(address)
         else:
@@ -80,23 +108,17 @@ class Client(object):
         try:
             req = self.http.get(self.url)
         except requests.exceptions.ConnectionError:
-            print("Connection refused")
-            exit()
-            
+            raise ConnectionRefused
+
         if req.status_code == 200:
             # Check for empty response
             if req.text:
-                if req.json()['status'] == '1':
-                    return req.json()
+                data = req.json()
+                if data.get('status') == '1':
+                    return data
                 else:
-                    print(req.json()['message'])
-                    exit()
-            else:
-                print("Invalid Request")
-                exit()
-        else:
-            print("Problem with connection, status code: ", req.status_code)
-            exit()
+                    raise EmptyResponse(data.get('message', 'no message'))
+        raise BadRequest("Problem with connection, status code: %s" % req.status_code)
 
     def check_and_get_api(self):
         if self.url_dict[self.API_KEY]:  # Check if api_key is empty string
