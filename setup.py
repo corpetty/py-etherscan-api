@@ -8,5 +8,8 @@ setup(
     license='MIT',
     author='coreypetty',
     author_email='corey.a.petty@gmail.com',
-    description='Python Bindings to Etherscan.io API'
+    description='Python Bindings to Etherscan.io API',
+    requires=[
+        'requests==2.18.4',
+    ],
 )
