@@ -45,7 +45,7 @@ class Account(Client):
 
         sort options:
             'asc' -> ascending order
-            'des' -> descending order
+            'desc' -> descending order
 
         internal options:
             True  -> Gets the internal transactions of a smart contract
