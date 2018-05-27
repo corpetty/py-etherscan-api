@@ -1,4 +1,7 @@
 # py-etherscan-api module
+
+[![Build Status](https://secure.travis-ci.org/corpetty/py-etherscan-api.png?branch=master)](http://travis-ci.org/corpetty/py-etherscan-api)
+
 EtherScan.io API python bindings
 
 ## Description
