@@ -114,7 +114,8 @@ class Client(object):
             # Check for empty response
             if req.text:
                 data = req.json()
-                if data.get('status') == '1' or 'result' in data:
+                status = data.get('status')
+                if status == '1' or self.check_keys_api(data):
                     return data
                 else:
                     raise EmptyResponse(data.get('message', 'no message'))
@@ -125,3 +126,7 @@ class Client(object):
             pass
         else:
             self.url_dict[self.API_KEY] = input('Please type your EtherScan.io API key: ')
+
+    def check_keys_api(self, data):
+        return all (k in data for k in ('jsonrpc', 'id', 'result'))
+    
