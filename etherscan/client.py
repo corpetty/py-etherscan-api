@@ -114,7 +114,7 @@ class Client(object):
             # Check for empty response
             if req.text:
                 data = req.json()
-                if data.get('status') == '1':
+                if data.get('status') == '1' or 'result' in data:
                     return data
                 else:
                     raise EmptyResponse(data.get('message', 'no message'))
