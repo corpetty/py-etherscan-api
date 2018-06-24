@@ -12,28 +12,32 @@ class Proxies(Client):
         self.build_url()
         req = self.connect()
         return req['result']
-    
+
     def get_block_by_number(self, block_number: Union[str, int]):
         self.url_dict[self.ACTION] = 'eth_getBlockByNumber'
-        self.url_dict[self.TAG] = block_number if type(block_number) is str else hex(block_number)
+        self.url_dict[self.TAG] = block_number if type(
+            block_number) is str else hex(block_number)
         self.url_dict[self.BOOLEAN] = 'true'
         self.build_url()
         req = self.connect()
         return req['result']
 
     def get_uncle_by_blocknumber_index(self,
-        block_number: Union[str, int],
-        index: Union[str, int]):
+                                       block_number: Union[str, int],
+                                       index: Union[str, int]):
         self.url_dict[self.ACTION] = 'eth_getUncleByBlockNumberAndIndex'
-        self.url_dict[self.TAG] = block_number if type(block_number) is str else hex(block_number)
+        self.url_dict[self.TAG] = block_number if type(
+            block_number) is str else hex(block_number)
         self.url_dict[self.INDEX] = index if type(index) is str else hex(index)
         self.build_url()
         req = self.connect()
         return req['result']
 
-    def get_block_transaction_count_by_number(self, block_number: Union[str, int]):
+    def get_block_transaction_count_by_number(self,
+                                              block_number: Union[str, int]):
         self.url_dict[self.ACTION] = 'eth_getBlockTransactionCountByNumber'
-        self.url_dict[self.TAG] = block_number if type(block_number) is str else hex(block_number)
+        self.url_dict[self.TAG] = block_number if type(
+            block_number) is str else hex(block_number)
         self.build_url()
         req = self.connect()
         return req['result']
@@ -46,10 +50,11 @@ class Proxies(Client):
         return req['result']
 
     def get_transaction_by_blocknumber_index(self,
-        block_number: Union[str, int],
-        index: Union[str, int]):
+                                             block_number: Union[str, int],
+                                             index: Union[str, int]):
         self.url_dict[self.ACTION] = 'eth_getTransactionByBlockNumberAndIndex'
-        self.url_dict[self.TAG] = block_number if type(block_number) is str else hex(block_number)
+        self.url_dict[self.TAG] = block_number if type(
+            block_number) is str else hex(block_number)
         self.url_dict[self.INDEX] = index if type(index) is str else hex(index)
         self.build_url()
         req = self.connect()
@@ -69,5 +74,3 @@ class Proxies(Client):
         self.build_url()
         req = self.connect()
         return req['result']
-
-

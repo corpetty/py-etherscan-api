@@ -30,7 +30,8 @@ class BadRequest(ClientException):
     """Invalid request passed"""
 
 
-#  Assume user puts his API key in the api_key.json file under variable name "key"
+#  Assume user puts his API key in the api_key.json
+#  file under variable name "key"
 class Client(object):
     dao_address = '0xbb9bc244d798123fde783fcc1c72d3bb8c189413'
 
@@ -65,7 +66,6 @@ class Client(object):
     def __init__(self, address, api_key=''):
         self.http = requests.session()
         self.url_dict = collections.OrderedDict([
-
             (self.MODULE, ''),
             (self.ADDRESS, ''),
             (self.OFFSET, ''),
@@ -86,12 +86,12 @@ class Client(object):
             (self.TAG, ''),
             (self.BOOLEAN, ''),
             (self.INDEX, ''),
-            (self.API_KEY, api_key)]
-        )
+            (self.API_KEY, api_key)])
 
-        # self.url_dict[API_KEY] = str(api_key)
+        # Var initialization should take place within init
+        self.url = None
+
         self.check_and_get_api()
-        # self.key = self.URL_BASES['key'] + self.API_KEY
 
         if (len(address) > 20) and (type(address) == list):
             raise BadRequest("Etherscan only takes 20 addresses at a time")
@@ -101,7 +101,9 @@ class Client(object):
             self.url_dict[self.ADDRESS] = address
 
     def build_url(self):
-        self.url = self.PREFIX + ''.join([param + val if val else '' for param, val in self.url_dict.items()])
+        self.url = self.PREFIX + ''.join(
+            [param + val if val else '' for param, val in
+             self.url_dict.items()])
 
     def connect(self):
         # TODO: deal with "unknown exception" error
@@ -119,14 +121,16 @@ class Client(object):
                     return data
                 else:
                     raise EmptyResponse(data.get('message', 'no message'))
-        raise BadRequest("Problem with connection, status code: %s" % req.status_code)
+        raise BadRequest(
+            "Problem with connection, status code: %s" % req.status_code)
 
     def check_and_get_api(self):
         if self.url_dict[self.API_KEY]:  # Check if api_key is empty string
             pass
         else:
-            self.url_dict[self.API_KEY] = input('Please type your EtherScan.io API key: ')
+            self.url_dict[self.API_KEY] = input(
+                'Please type your EtherScan.io API key: ')
 
-    def check_keys_api(self, data):
-        return all (k in data for k in ('jsonrpc', 'id', 'result'))
-    
+    @staticmethod
+    def check_keys_api(data):
+        return all(k in data for k in ('jsonrpc', 'id', 'result'))
