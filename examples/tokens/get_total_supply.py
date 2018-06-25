@@ -8,6 +8,6 @@ with open('../../api_key.json', mode='r') as key_file:
 #     DGD
 #     MKR
 #     TheDAO
-api = Tokens(tokenname='TheDAO', api_key=key)
+api = Tokens(tokenname='SNT', api_key=key)
 supply = api.get_total_supply()
 print(supply)

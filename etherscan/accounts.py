@@ -5,49 +5,23 @@ import re
 class Account(Client):
     def __init__(self, address=Client.dao_address, api_key='YourApiKeyToken'):
         Client.__init__(self, address=address, api_key=api_key)
-        self.module = self.URL_BASES['module'] + 'account'
-
-    def make_url(self, call_type=''):
-        if call_type == 'balance':
-            self.url = self.URL_BASES['prefix'] \
-                + self.module \
-                + self.action \
-                + self.address \
-                + self.tag \
-                + self.key
-        elif call_type == 'transactions':
-            self.url = self.URL_BASES['prefix'] \
-                + self.module \
-                + self.action \
-                + self.address \
-                + self.offset \
-                + self.page \
-                + self.key
-        elif call_type == 'blocks':
-            self.url = self.URL_BASES['prefix'] \
-                + self.module \
-                + self.action \
-                + self.address \
-                + self.blocktype \
-                + self.offset \
-                + self.page \
-                + self.key
+        self.url_dict[self.MODULE] = 'account'
 
     def get_balance(self):
-        self.action = self.URL_BASES['action'] + 'balance'
-        self.tag = self.URL_BASES['tag'] + 'latest'
-        self.make_url(call_type='transactions')
+        self.url_dict[self.ACTION] = 'balance'
+        self.url_dict[self.TAG] = 'latest'
+        self.build_url()
         req = self.connect()
         return req['result']
 
     def get_balance_multiple(self):
-        self.action = self.URL_BASES['action'] + 'balancemulti'
-        self.tag = self.URL_BASES['tag'] + 'latest'
-        self.make_url(call_type='balance')
+        self.url_dict[self.ACTION] = 'balancemulti'
+        self.url_dict[self.TAG] = 'latest'
+        self.build_url()
         req = self.connect()
         return req['result']
 
-    def get_transaction_page(self, page=1, offset=10000, sort='asc') -> list:
+    def get_transaction_page(self, page=1, offset=10000, sort='asc', internal=False) -> list:
         """
         Get a page of transactions, each transaction returns list of dict with keys:
             nonce
@@ -71,26 +45,36 @@ class Account(Client):
 
         sort options:
             'asc' -> ascending order
-            'des' -> descending order
+            'desc' -> descending order
+
+        internal options:
+            True  -> Gets the internal transactions of a smart contract
+            False -> (default) get normal external transactions
         """
-        self.action = self.URL_BASES['action'] + 'txlist'
-        self.page = self.URL_BASES['page'] + str(page)
-        self.offset = self.URL_BASES['offset'] + str(offset)
-        self.sort = self.URL_BASES['sort'] + sort
-        self.make_url(call_type='transactions')
+        if internal:
+            self.url_dict[self.ACTION] = 'txlistinternal'
+        else:
+            self.url_dict[self.ACTION] = 'txlist'
+        self.url_dict[self.PAGE] = str(page)
+        self.url_dict[self.OFFSET] = str(offset)
+        self.url_dict[self.SORT] = sort
+        self.build_url()
         req = self.connect()
         return req['result']
 
-    def get_all_transactions(self, offset=10000, sort='asc') -> list:
-        self.action = self.URL_BASES['action'] + 'txlist'
-        self.page = self.URL_BASES['page'] + str(1)
-        self.offset = self.URL_BASES['offset'] + str(offset)
-        self.sort = self.URL_BASES['sort'] + sort
-        self.make_url(call_type='transactions')
+    def get_all_transactions(self, offset=10000, sort='asc', internal=False) -> list:
+        if internal:
+            self.url_dict[self.ACTION] = 'txlistinternal'
+        else:
+            self.url_dict[self.ACTION] = 'txlist'
+        self.url_dict[self.PAGE] = str(1)
+        self.url_dict[self.OFFSET] = str(offset)
+        self.url_dict[self.SORT] = sort
+        self.build_url()
 
         trans_list = []
         while True:
-            self.make_url(call_type='transactions')
+            self.build_url()
             req = self.connect()
             if "No transactions found" in req['message']:
                 print("Total number of transactions: {}".format(len(trans_list)))
@@ -99,9 +83,9 @@ class Account(Client):
             else:
                 trans_list += req['result']
                 # Find any character block that is a integer of any length
-                page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.page)
+                page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.url_dict[self.PAGE])
                 print("page {} added".format(page_number[0]))
-                self.page = self.URL_BASES['page'] + str(int(page_number[0]) + 1)
+                self.url_dict[self.PAGE] = str(int(page_number[0]) + 1)
 
     def get_blocks_mined_page(self, blocktype='blocks', page=1, offset=10000) -> list:
         """
@@ -114,22 +98,22 @@ class Account(Client):
             'blocks' -> full blocks only
             'uncles' -> uncles only
         """
-        self.action = self.URL_BASES['action'] + 'getminedblocks'
-        self.blocktype = self.URL_BASES['blocktype'] + blocktype
-        self.page = self.URL_BASES['page'] + str(page)
-        self.offset = self.URL_BASES['offset'] + str(offset)
-        self.make_url(call_type='blocks')
+        self.url_dict[self.ACTION] = 'getminedblocks'
+        self.url_dict[self.BLOCK_TYPE] = blocktype
+        self.url_dict[self.PAGE] = str(page)
+        self.url_dict[self.OFFSET] = str(offset)
+        self.build_url()
         req = self.connect()
         return req['result']
 
     def get_all_blocks_mined(self, blocktype='blocks', offset=10000) -> list:
-        self.action = self.URL_BASES['action'] + 'getminedblocks'
-        self.blocktype = self.URL_BASES['blocktype'] + blocktype
-        self.page = self.URL_BASES['page'] + str(1)
-        self.offset = self.URL_BASES['offset'] + str(offset)
+        self.url_dict[self.ACTION] = 'getminedblocks'
+        self.url_dict[self.BLOCK_TYPE] = blocktype
+        self.url_dict[self.PAGE] = str(1)
+        self.url_dict[self.OFFSET] = str(offset)
         blocks_list = []
         while True:
-            self.make_url(call_type='blocks')
+            self.build_url()
             req = self.connect()
             print(req['message'])
             if "No transactions found" in req['message']:
@@ -138,9 +122,16 @@ class Account(Client):
             else:
                 blocks_list += req['result']
                 # Find any character block that is a integer of any length
-                page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.page)
+                page_number = re.findall(r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0', self.url_dict[self.PAGE])
                 print("page {} added".format(page_number[0]))
-                self.page = self.URL_BASES['page'] + str(int(page_number[0]) + 1)
+                self.url_dict[self.PAGE] = str(int(page_number[0]) + 1)
+
+    def get_internal_by_hash(self, tx_hash=''):
+        """
+        Currently not implemented
+        :return:
+        """
+        pass
 
     def update_transactions(self, address, trans):
         """

@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/corpetty/py-etherscan-api.png?branch=master)](http://travis-ci.org/corpetty/py-etherscan-api) [![Join the chat at https://gitter.im/py-etherscan/Lobby](https://badges.gitter.im/py-etherscan/Lobby.svg)](https://gitter.im/py-etherscan/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+
 EtherScan.io API python bindings
 
 ## Description
