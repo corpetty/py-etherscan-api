@@ -7,7 +7,8 @@ EtherScan.io API python bindings
 
 ## Description
 This module is written as an effort to provide python bindings to the EtherScan.io API, which can be found at: 
-https://etherscan.io/apis
+https://etherscan.io/apis. If you are interacting with a contract on the Ropsten Testnet please use 
+https://ropsten.etherscan.io/apis. 
 In order to use this, you must attain an Etherscan user account, and generate an API key.
 
 In order to use the API, you must provide an API key at runtime, which can be found at the Etherscan.io API website.
@@ -22,6 +23,7 @@ with `YourApiKeyToken` is your provided API key token from EtherScan.io
 To install the package to your computer, simply run the following command in the base directory:
 
     python setup.py install
+	
 
 ## Available bindings
 Currently, only the following Etherscan.io API modules are available:
