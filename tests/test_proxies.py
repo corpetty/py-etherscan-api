@@ -1,7 +1,6 @@
 import re
 import unittest
 
-from etherscan.client import EmptyResponse
 from etherscan.proxies import Proxies
 
 API_KEY = 'YourAPIkey'
@@ -17,4 +16,3 @@ class ProxiesTestCase(unittest.TestCase):
         print(most_recent)
         p = re.compile('^[0-9]{7}$')
         self.assertTrue(p.match(str(most_recent)))
-            
