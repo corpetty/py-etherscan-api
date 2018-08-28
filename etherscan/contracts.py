@@ -11,3 +11,9 @@ class Contract(Client):
         self.build_url()
         req = self.connect()
         return req['result']
+
+    def get_sourcecode(self):
+        self.url_dict[self.ACTION] = 'getsourcecode'
+        self.build_url()
+        req = self.connect()
+        return req['result']

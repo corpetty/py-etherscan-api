@@ -25,7 +25,7 @@ class Account(Client):
         return req['result']
 
     def get_transaction_page(self, page=1, offset=10000, sort='asc',
-                             internal=False) -> list:
+                             internal=False, erc20=False) -> list:
         """
         Get a page of transactions, each transaction
         returns list of dict with keys:
@@ -52,12 +52,20 @@ class Account(Client):
             'asc' -> ascending order
             'desc' -> descending order
 
-        internal options:
-            True  -> Gets the internal transactions of a smart contract
+        internal options: (currently marked at Beta for etherscan.io)
+            True  -> Gets the internal transactions of the address
             False -> (default) get normal external transactions
+
+        erc20 options: (currently marked at Beta for etherscan.io)
+            True  -> Gets the erc20 token transcations of the address
+            False -> (default) get normal external transactions
+
+        NOTE: not sure if this works for contract addresses, requires testing
         """
         if internal:
             self.url_dict[self.ACTION] = 'txlistinternal'
+        elif erc20:
+            self.url_dict[self.ACTION] = 'tokentx'
         else:
             self.url_dict[self.ACTION] = 'txlist'
         self.url_dict[self.PAGE] = str(page)
