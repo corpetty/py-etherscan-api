@@ -27,10 +27,18 @@ To install the package to your computer, simply run the following command in the
 Currently, only the following Etherscan.io API modules are available:
 
 - accounts
+- contracts
 - stats
 - tokens
+- proxies
 
-The remaining available modules provided by Etherscan.io will be added shortly
+The remaining available modules provided by Etherscan.io will be added eventually...
+
+## Available Networks
+Currently, this works for the following networks:
+
+- Mainnet
+- Ropsten
 
 ## Examples
 All possible calls have an associated example file in the examples folder to show how to call the binding
