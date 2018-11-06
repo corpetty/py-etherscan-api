@@ -11,6 +11,6 @@ setup(
     author_email='corey.a.petty@gmail.com',
     description='Python Bindings to Etherscan.io API',
     install_requires=[
-        'requests==2.18.4',
+        'requests>=2.20.0',
     ],
 )
