@@ -1,16 +1,19 @@
-from distutils.core import setup
+import setuptools
 
-setup(
+setuptools.setup(
     name='py_etherscan_api',
-    version='0.7.0',
+    version='0.8.0',
     packages=['examples', 'examples.stats', 'examples.tokens',
               'examples.accounts', 'etherscan'],
     url='https://github.com/corpetty/py-etherscan-api',
     license='MIT',
     author='coreypetty',
-    author_email='corey.a.petty@gmail.com',
+    author_email='petty.btc@gmail.com',
     description='Python Bindings to Etherscan.io API',
     install_requires=[
         'requests>=2.20.0',
     ],
+    classifiers=[
+        "Programming Language :: Python :: 3"
+    ]
 )
