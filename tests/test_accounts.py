@@ -2,15 +2,15 @@ import unittest
 
 from etherscan.accounts import Account
 
-SINGLE_BALANCE = '40807168566070000000000'
+SINGLE_BALANCE = '40807178566070000000000'
 SINGLE_ACCOUNT = '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a'
 MULTI_ACCOUNT = ['0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a',
            '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a']
 MULTI_BALANCE = [
     {'account': '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a', 
-     'balance': '40807168566070000000000'},
+     'balance': '40807178566070000000000'},
     {'account': '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a', 
-    'balance': '40807168566070000000000'}
+    'balance': '40807178566070000000000'}
 ]
 API_KEY = 'YourAPIkey'
 
