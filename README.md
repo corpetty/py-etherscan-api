@@ -35,6 +35,7 @@ Currently, only the following Etherscan.io API modules are available:
 - tokens
 - proxies
 - blocks
+- transactions
 
 The remaining available modules provided by Etherscan.io will be added eventually...
 

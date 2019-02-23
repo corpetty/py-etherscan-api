@@ -4,7 +4,7 @@ setuptools.setup(
     name='py_etherscan_api',
     version='0.8.0',
     packages=['examples', 'examples.stats', 'examples.tokens',
-              'examples.accounts', 'examples.blocks', 'etherscan'],
+              'examples.accounts', 'examples.blocks', 'examples.transactions',  'etherscan'],
     url='https://github.com/corpetty/py-etherscan-api',
     license='MIT',
     author='coreypetty',
