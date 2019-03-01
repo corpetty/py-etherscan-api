@@ -47,7 +47,7 @@ class Client(object):
     TO = '&to='
     VALUE = '&value='
     DATA = '&data='
-    POSITION = '&='
+    POSITION = '&position='
     HEX = '&hex='
     GAS_PRICE = '&gasPrice='
     GAS = '&gas='

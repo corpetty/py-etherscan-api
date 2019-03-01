@@ -74,3 +74,27 @@ class Proxies(Client):
         self.build_url()
         req = self.connect()
         return req['result']
+
+    def get_code(self, address: str):
+        self.url_dict[self.ACTION] = 'eth_getCode'
+        self.url_dict[self.ADDRESS] = address
+        self.url_dict[self.TAG] = 'latest'
+        self.build_url()
+        req = self.connect()
+        return req['result']
+
+    def get_storage_at(self, address: str, position: Union[str, int]):
+        self.url_dict[self.ACTION] = 'eth_getStorageAt'
+        self.url_dict[self.ADDRESS] = address
+        self.url_dict[self.POSITION] = position if type(
+            position) is str else hex(position)
+        self.url_dict[self.TAG] = 'latest'
+        self.build_url()
+        req = self.connect()
+        return req['result']
+
+    def gas_price(self):
+        self.url_dict[self.ACTION] = 'eth_gasPrice'
+        self.build_url()
+        req = self.connect()
+        return req['result']

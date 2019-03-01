@@ -14,4 +14,5 @@ class BlocksTestCase(unittest.TestCase):
         api = Blocks(api_key=(API_KEY))
         reward_object = api.get_block_reward(BLOCK)
         self.assertEqual(reward_object['blockReward'], BLOCK_REWARD)
-        self.assertEqual(reward_object['uncleInclusionReward'], UNCLE_INCLUSION_REWARD)
+        self.assertEqual(reward_object['uncleInclusionReward'],
+                         UNCLE_INCLUSION_REWARD)
