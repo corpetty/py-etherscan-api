@@ -1,0 +1,76 @@
+{
+  "_args": [
+    [
+      "@graphql-inspector/core@1.19.0",
+      "/data/data/com.termux/files/home"
+    ]
+  ],
+  "_from": "@graphql-inspector/core@1.19.0",
+  "_id": "@graphql-inspector/core@1.19.0",
+  "_inBundle": false,
+  "_integrity": "sha512-DTZuxIxQt3aIxWBtlsbW52WtR+N83OB9Evy+sThPdrn0PihISrOHXmuo8zdjkbsZN0ashZb9QSF6lAMHLTHFag==",
+  "_location": "/@graphql-inspector/core",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@graphql-inspector/core@1.19.0",
+    "name": "@graphql-inspector/core",
+    "escapedName": "@graphql-inspector%2fcore",
+    "scope": "@graphql-inspector",
+    "rawSpec": "1.19.0",
+    "saveSpec": null,
+    "fetchSpec": "1.19.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@graphql-inspector/core/-/core-1.19.0.tgz",
+  "_spec": "1.19.0",
+  "_where": "/data/data/com.termux/files/home",
+  "author": {
+    "name": "Kamil Kisiela",
+    "email": "kamil.kisiela@gmail.com",
+    "url": "https://github.com/kamilkisiela"
+  },
+  "bugs": {
+    "url": "https://github.com/kamilkisiela/graphql-inspector/issues"
+  },
+  "dependencies": {
+    "dependency-graph": "0.8.0"
+  },
+  "description": "Tooling for GraphQL. Compare GraphQL Schemas, check documents, find breaking changes, find similar types.",
+  "devDependencies": {
+    "@types/graphql": "14.2.0",
+    "@types/jest": "24.0.13",
+    "graphql-tag": "2.10.1",
+    "jest": "24.8.0",
+    "ts-jest": "24.0.2",
+    "typescript": "3.4.5"
+  },
+  "homepage": "https://github.com/kamilkisiela/graphql-inspector#readme",
+  "keywords": [
+    "graphql",
+    "graphql-inspector",
+    "tools"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@graphql-inspector/core",
+  "peerDependencies": {
+    "graphql": "^0.13.0 || ^14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamilkisiela/graphql-inspector.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist/",
+    "prebuild": "yarn clean",
+    "prepublishOnly": "yarn build",
+    "test": "jest"
+  },
+  "sideEffects": false,
+  "version": "1.19.0"
+}
