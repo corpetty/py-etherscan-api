@@ -4,7 +4,7 @@ envlist = pep8,py3
 [testenv]
 deps =
     pytest
-    -r{toxinidir}/pip-requirements.env
+    -r{toxinidir}/pip-requirements.text /style/
 commands =
     python -m unittest discover --start-directory=tests/
 
