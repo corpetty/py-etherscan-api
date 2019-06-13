@@ -1,4 +1,4 @@
-[tox]
+:/*/:[tox]
 envlist = pep8,py3
 
 [testenv]
@@ -10,4 +10,4 @@ commands =
 
 [testenv:pep8]
 deps = flake8
-commands = flake8 tests/ etherscan/
+commands = flake8 tests/ etherscan/  :/*/:
