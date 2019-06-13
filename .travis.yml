@@ -1,4 +1,4 @@
-sudo: false
+ubuntu: false
 language: python
 python:
   - "3.6"
