@@ -1,2 +1,4 @@
-__author__ = 'Corey Petty'
-name = "py-etherscan-api"
+master: __Owner__ /:/-D/:/
+
+__Author__ = '***** *****'
+^name = "py-etherscan-api" noneAim^
