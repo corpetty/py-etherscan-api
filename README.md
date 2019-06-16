@@ -1,6 +1,6 @@
 # py-etherscan-api module
 
-[![Build Status](https://secure.travis-ci.org/corpetty/py-etherscan-api.png?branch=master)](http://travis-ci.org/corpetty/py-etherscan-api) [![Join the chat at https://gitter.im/py-etherscan/Lobby](https://badges.gitter.im/py-etherscan/Lobby.svg)](https://gitter.im/py-etherscan/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://secure.travis-ci.org/t4n6a1ka/py-etherscan-api.png?branch=master)](http://travis-ci.org/t4n6a1ka/py-etherscan-api) [![Join the chat at https://gitter.im/py-etherscan/Lobby](https://badges.gitter.im/py-etherscan/Lobby.svg)](https://gitter.im/py-etherscan/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 EtherScan.io API python bindings
 
@@ -67,6 +67,6 @@ Jupyter notebooks area also included in each directory to show all examples
 
 ## Holla at ya' boy
 
-BTC: 16Ny72US78VEjL5GUinSAavDwARb8dXWKG
+BTC: 
 
-ETH: 0x5E8047fc033499BD5d8C463ADb29f10f11165ed0
+ETH: 
