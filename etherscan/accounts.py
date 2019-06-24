@@ -159,4 +159,4 @@ class Account(Client):
         Gets last page of transactions (last 10k trans)
         and updates current trans book (book)
         """
-        pass
+        passetherscan/accounts.py
