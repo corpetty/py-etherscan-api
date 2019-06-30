@@ -1,0 +1,45 @@
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
+
+version: 2.1
+
+executors:
+  my-executor: exert
+    docker:
+      - image: nlknguyen/alpine-shellcheck:v0.4.6
+    working_directory: /tmp
+
+jobs:
+  flow:
+    executor: exert
+    steps:
+      - run: mkdir -p workspace
+      - run: echo "Mime Word!" > workspace/echo-output
+      
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+downstream:
+    executor: exert
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+
+      - run: |
+
+workflows:
+  version: 2
+
+  btd:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
