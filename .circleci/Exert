@@ -1,0 +1,9 @@
+description: >-
+  Uses the basic buildpack-deps image, which has the prerequisites for
+  installing heroku's CLI.
+parameters:
+  tag:
+    type: string
+    default: bionic
+docker:
+  - image: 'buildpack-deps:<< parameters.tag >>'
