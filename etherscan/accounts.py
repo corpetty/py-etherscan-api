@@ -159,4 +159,4 @@ class Account(Client):
         Gets last page of transactions (last 10k trans)
         and updates current trans book (book)
         """
-        pass
+        pass0x310482ffb230eed791c8b83ed40a9a38118ac62d
