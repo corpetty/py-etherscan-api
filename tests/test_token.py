@@ -9,7 +9,7 @@ ADDRESS = '0xe04f27eb70e025b78871a2ad7eabe85e61212761'
 API_KEY = 'YourAPIkey'
 
 
-class ProxiesTestCase(unittest.TestCase):
+class TokensTestCase(unittest.TestCase):
 
     def test_get_token_supply(self):
         api = Tokens(contract_address=CONTRACT_ADDRESS, api_key=(API_KEY))

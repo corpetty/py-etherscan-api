@@ -4,7 +4,7 @@ import re
 
 class Account(Client):
     PAGE_NUM_PATTERN = re.compile(
-        '[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0')
+        r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0')
 
     def __init__(self, address=Client.dao_address, api_key='YourApiKeyToken'):
         Client.__init__(self, address=address, api_key=api_key)

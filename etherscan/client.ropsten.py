@@ -30,13 +30,12 @@ class BadRequest(ClientException):
     """Invalid request passed"""
 
 
-#  Assume user puts his API key in the api_key.json
-#  file under variable name "key"
+# API key must be in the api_key.json file under variable name "key"
 class Client(object):
     dao_address = '0xbb9bc244d798123fde783fcc1c72d3bb8c189413'
 
     # Constants
-    PREFIX = 'https://api.etherscan.io/api?'
+    PREFIX = 'https://api-ropsten.etherscan.io/api?'  # TESTNET
     MODULE = 'module='
     ACTION = '&action='
     CONTRACT_ADDRESS = '&contractaddress='
@@ -66,6 +65,7 @@ class Client(object):
     def __init__(self, address, api_key=''):
         self.http = requests.session()
         self.url_dict = collections.OrderedDict([
+
             (self.MODULE, ''),
             (self.ADDRESS, ''),
             (self.OFFSET, ''),
@@ -86,12 +86,12 @@ class Client(object):
             (self.TAG, ''),
             (self.BOOLEAN, ''),
             (self.INDEX, ''),
-            (self.API_KEY, api_key)])
+            (self.API_KEY, api_key)]
+        )
 
-        # Var initialization should take place within init
-        self.url = None
-
+        # self.url_dict[API_KEY] = str(api_key)
         self.check_and_get_api()
+        # self.key = self.URL_BASES['key'] + self.API_KEY
 
         if (len(address) > 20) and (type(address) == list):
             raise BadRequest("Etherscan only takes 20 addresses at a time")
@@ -102,8 +102,7 @@ class Client(object):
 
     def build_url(self):
         self.url = self.PREFIX + ''.join(
-            [param + val if val else '' for param, val in
-             self.url_dict.items()])
+            [parm + val if val else '' for parm, val in self.url_dict.items()])
 
     def connect(self):
         # TODO: deal with "unknown exception" error
@@ -122,7 +121,7 @@ class Client(object):
                 else:
                     raise EmptyResponse(data.get('message', 'no message'))
         raise BadRequest(
-            "Problem with connection, status code: %s" % req.status_code)
+            f"Problem with connection, status code: {req.status_code}")
 
     def check_and_get_api(self):
         if self.url_dict[self.API_KEY]:  # Check if api_key is empty string
@@ -131,6 +130,5 @@ class Client(object):
             self.url_dict[self.API_KEY] = input(
                 'Please type your EtherScan.io API key: ')
 
-    @staticmethod
-    def check_keys_api(data):
+    def check_keys_api(self, data):
         return all(k in data for k in ('jsonrpc', 'id', 'result'))
