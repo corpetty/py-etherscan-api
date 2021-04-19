@@ -1,2 +1,2 @@
 requests>=2.20.0
-typing==3.6.4
+typing==3.7.4.3
