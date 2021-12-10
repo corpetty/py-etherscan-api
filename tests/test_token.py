@@ -1,4 +1,5 @@
 import unittest
+import warnings
 
 from etherscan.tokens import Tokens
 
@@ -10,6 +11,9 @@ API_KEY = 'YourAPIkey'
 
 
 class TokensTestCase(unittest.TestCase):
+
+    def setUp(self):
+        warnings.simplefilter('ignore', ResourceWarning)
 
     def test_get_token_supply(self):
         api = Tokens(contract_address=CONTRACT_ADDRESS, api_key=(API_KEY))

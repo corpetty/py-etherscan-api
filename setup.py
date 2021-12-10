@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='py_etherscan_api',
-    version='0.8.0',
+    version='0.9.0',
     packages=['examples', 'examples.stats', 'examples.tokens',
               'examples.accounts', 'examples.blocks', 'examples.transactions',  'etherscan'],
     url='https://github.com/corpetty/py-etherscan-api',
