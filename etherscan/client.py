@@ -30,6 +30,10 @@ class BadRequest(ClientException):
     """Invalid request passed"""
 
 
+class InvalidAPIKey(ClientException):
+    """Invalid API key"""
+
+
 #  Assume user puts his API key in the api_key.json
 #  file under variable name "key"
 class Client(object):
@@ -59,6 +63,11 @@ class Client(object):
     TAG = '&tag='
     BOOLEAN = '&boolean='
     INDEX = '&index='
+    FROM_BLOCK = '&fromBlock='
+    TO_BLOCK = '&toBlock='
+    TOPIC0 = '&topic0='
+    TOPIC0_1_OPR = '&topic0_1_opr='
+    TOPIC1 = '&topic1='
     API_KEY = '&apikey='
 
     url_dict = {}
@@ -86,7 +95,12 @@ class Client(object):
             (self.TAG, ''),
             (self.BOOLEAN, ''),
             (self.INDEX, ''),
-            (self.API_KEY, api_key)])
+            (self.API_KEY, api_key),
+            (self.FROM_BLOCK, ''),
+            (self.TO_BLOCK, ''),
+            (self.TOPIC0, ''),
+            (self.TOPIC0_1_OPR, ''),
+            (self.TOPIC1, '')])
 
         # Var initialization should take place within init
         self.url = None
@@ -119,6 +133,8 @@ class Client(object):
                 status = data.get('status')
                 if status == '1' or self.check_keys_api(data):
                     return data
+                elif status == '0' and data.get('result') == "Invalid API Key":
+                    raise InvalidAPIKey(data.get('result'))
                 else:
                     raise EmptyResponse(data.get('message', 'no message'))
         raise BadRequest(

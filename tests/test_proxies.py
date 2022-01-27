@@ -1,5 +1,6 @@
 import re
 import unittest
+import warnings
 
 from etherscan.proxies import Proxies
 
@@ -23,11 +24,14 @@ CODE_CONTENTS = "0x3660008037602060003660003473273930d21e01ee25e4c219b6" \
 
 class ProxiesTestCase(unittest.TestCase):
 
+    def setUp(self):
+        warnings.simplefilter('ignore', ResourceWarning)
+
     def test_get_most_recent_block(self):
         api = Proxies(api_key=API_KEY)
         most_recent = int(api.get_most_recent_block(), 16)
         print(most_recent)
-        p = re.compile('^[0-9]{7}$')
+        p = re.compile('^[0-9]{8}$')
         self.assertTrue(p.match(str(most_recent)))
 
     def test_get_block_by_number(self):

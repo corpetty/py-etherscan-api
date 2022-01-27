@@ -1,4 +1,5 @@
 import unittest
+import warnings
 
 from etherscan.transactions import Transactions
 
@@ -9,6 +10,9 @@ ERROR_STRING = 'Bad jump destination'
 
 
 class TransactionsTestCase(unittest.TestCase):
+
+    def setUp(self):
+        warnings.simplefilter('ignore', ResourceWarning)
 
     def test_get_status(self):
         api = Transactions(api_key=(API_KEY))

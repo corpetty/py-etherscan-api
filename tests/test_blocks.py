@@ -1,4 +1,5 @@
 import unittest
+import warnings
 
 from etherscan.blocks import Blocks
 
@@ -9,6 +10,9 @@ API_KEY = 'YourAPIkey'
 
 
 class BlocksTestCase(unittest.TestCase):
+
+    def setUp(self):
+        warnings.simplefilter('ignore', ResourceWarning)
 
     def test_get_block_reward(self):
         api = Blocks(api_key=(API_KEY))
