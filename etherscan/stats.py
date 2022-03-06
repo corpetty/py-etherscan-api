@@ -3,7 +3,7 @@ from .client import Client
 
 class Stats(Client):
     def __init__(self, api_key='YourApiKeyToken'):
-        Client.__init__(self, address='', api_key=api_key)
+        Client.__init__(self, network='', address='', api_key=api_key)
         self.url_dict[self.MODULE] = 'stats'
 
     def get_total_ether_supply(self):

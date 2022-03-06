@@ -36,7 +36,11 @@ class Client(object):
     dao_address = '0xbb9bc244d798123fde783fcc1c72d3bb8c189413'
 
     # Constants
-    PREFIX = 'https://api.etherscan.io/api?'
+    PREFIX_AVAX_MAINNET = 'https://api.snowtrace.io/api?'
+    PREFIX_AVAX_FUJU = '' #TODO FIND THE RIGHT URL
+    PREVIX_ETH_MAINNET = 'https://api.etherscan.io/api?'
+    PREFIX_ETH_ROPSTEN = 'https://api-ropsten.etherscan.io/api?'
+    PREFIX = ''
     MODULE = 'module='
     ACTION = '&action='
     CONTRACT_ADDRESS = '&contractaddress='
@@ -63,7 +67,7 @@ class Client(object):
 
     url_dict = {}
 
-    def __init__(self, address, api_key=''):
+    def __init__(self, network, address, api_key=''):
         self.http = requests.session()
         self.url_dict = collections.OrderedDict([
             (self.MODULE, ''),
@@ -100,6 +104,17 @@ class Client(object):
         else:
             self.url_dict[self.ADDRESS] = address
 
+        if network == "avalanche":
+            self.PREFIX = self.PREFIX_AVAX_MAINNET
+        elif network == "fuji":
+            self.PREFIX = self.PREFIX_AVAX_FUJU
+        elif network == "ethereum":
+            self.PREFIX = self.PREVIX_ETH_MAINNET
+        elif network == "ropsten":
+            self.PREFIX = self.PREFIX_ETH_ROPSTEN
+        else:
+            print("Please select an implemented network: (ethereum, ropsten, avalanche, fuji")
+
     def build_url(self):
         self.url = self.PREFIX + ''.join(
             [param + val if val else '' for param, val in
@@ -129,7 +144,7 @@ class Client(object):
             pass
         else:
             self.url_dict[self.API_KEY] = input(
-                'Please type your EtherScan.io API key: ')
+                'Please type your API key: ')
 
     @staticmethod
     def check_keys_api(data):

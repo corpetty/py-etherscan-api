@@ -6,8 +6,8 @@ class Account(Client):
     PAGE_NUM_PATTERN = re.compile(
         r'[1-9](?:\d{0,2})(?:,\d{3})*(?:\.\d*[1-9])?|0?\.\d*[1-9]|0')
 
-    def __init__(self, address=Client.dao_address, api_key='YourApiKeyToken'):
-        Client.__init__(self, address=address, api_key=api_key)
+    def __init__(self, network='ethereum', address=Client.dao_address, api_key='YourApiKeyToken'):
+        Client.__init__(self, network=network, address=address, api_key=api_key)
         self.url_dict[self.MODULE] = 'account'
 
     def get_balance(self):

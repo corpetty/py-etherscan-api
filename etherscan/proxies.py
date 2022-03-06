@@ -3,8 +3,8 @@ from typing import Union
 
 
 class Proxies(Client):
-    def __init__(self, api_key='YourApiKeyToken'):
-        Client.__init__(self, address='', api_key=api_key)
+    def __init__(self, network='', api_key='YourApiKeyToken'):
+        Client.__init__(self, network=network, address='', api_key=api_key)
         self.url_dict[self.MODULE] = 'proxy'
 
     def get_most_recent_block(self):

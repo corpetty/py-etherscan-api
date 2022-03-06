@@ -3,7 +3,7 @@ from .client import Client
 
 class Transactions(Client):
     def __init__(self, api_key='YourApiKeyToken'):
-        Client.__init__(self, address='', api_key=api_key)
+        Client.__init__(self, network='', address='', api_key=api_key)
         self.url_dict[self.MODULE] = 'transaction'
 
     def get_status(self, tx_hash: str):
