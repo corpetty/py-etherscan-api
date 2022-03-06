@@ -6,18 +6,22 @@ EtherScan.io API python bindings
 
 ## Description
 
-This module is written as an effort to provide python bindings to the EtherScan.io API, which can be found at:
-https://etherscan.io/apis. If you are interacting with a contract on the Ropsten Testnet please use
-https://ropsten.etherscan.io/apis.
-In order to use this, you must attain an Etherscan user account, and generate an API key.
+This module is written as an effort to provide python bindings to the EtherScan.io and Snowtrace.io APIs, which can be found at:
+- https://etherscan.io 
+- https://snowtrace.io 
 
-In order to use the API, you must provide an API key at runtime, which can be found at the Etherscan.io API website.
+In order to use this, you must attain a user account, and generate an API key with the appropriate service and provide at runtime, which can be found at the Etherscan.io API website.
 If you'd like to use the provided examples without altering them, then the JSON file `api_key.json` must be stored in
 the base directory. Its format is as follows:
 
-    { "key" : "YourApiKeyToken" }
+```json
+    { 
+      "key_etherscan" : "YourApiKeyToken",
+      "key_snowtrace" : "YourApiKeyToken" 
+    }
+```
 
-with `YourApiKeyToken` is your provided API key token from EtherScan.io
+with `YourApiKeyToken` is your provided API key token from EtherScan.io and Snowtrace.io respectively. 
 
 ## Installation
 
@@ -36,15 +40,16 @@ Currently, only the following Etherscan.io API modules are available:
 - proxies
 - blocks
 - transactions
+- tokens
 
-The remaining available modules provided by Etherscan.io will be added eventually...
+The remaining available modules provided by Etherscan.io and Snowtrace.io will be added eventually...
 
 ## Available Networks
 
 Currently, this works for the following networks:
 
-- Mainnet
-- Ropsten
+- Ethereum: Mainnet, Ropsten
+- Avalanche: Mainnet, Fuji
 
 ## Examples
 
@@ -56,14 +61,7 @@ Jupyter notebooks area also included in each directory to show all examples
 
 ## TODO:
 
-- Package and submit to PyPI
-- Add the following modules:
-  - event logs
-  - geth proxy
-  - websockets
-- Add robust documentation
-- Add unit test suite
-- Add request throttling based on Etherscan's suggestions
+- [ ] Figure out a roadmap
 
 ## Holla at ya' boy
 
