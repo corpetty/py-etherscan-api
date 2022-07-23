@@ -76,7 +76,7 @@ class Account(Client):
         return req['result']
 
     def get_all_transactions(self, offset=10000, sort='asc',
-                             internal=False) -> list:
+                             internal=False, page_limit=None) -> list:
         if internal:
             self.url_dict[self.ACTION] = 'txlistinternal'
         else:
@@ -102,6 +102,9 @@ class Account(Client):
                                          self.url_dict[self.PAGE])
                 print("page {} added".format(page_number[0]))
                 self.url_dict[self.PAGE] = str(int(page_number[0]) + 1)
+                if page_limit:
+                    if int(self.url_dict[self.PAGE]) > page_limit:
+                        return trans_list
 
     def get_blocks_mined_page(self, blocktype='blocks', page=1,
                               offset=10000) -> list:
