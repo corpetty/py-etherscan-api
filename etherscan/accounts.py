@@ -25,7 +25,7 @@ class Account(Client):
         return req['result']
 
     def get_transaction_page(self, page=1, offset=10000, sort='asc',
-                             internal=False, erc20=False) -> list:
+                             internal=False, erc20=False, erc721=False, erc1155=False) -> list:
         """
         Get a page of transactions, each transaction
         returns list of dict with keys:
@@ -63,10 +63,15 @@ class Account(Client):
         NOTE: not sure if this works for contract addresses, requires testing
         """
         if internal:
-            self.url_dict[self.ACTION] = 'txlistinternal'
+            self.url_dict[self.ACTION] = 'txlistinternal' # interact with contract
         elif erc20:
-            self.url_dict[self.ACTION] = 'tokentx'
+            self.url_dict[self.ACTION] = 'tokentx' # erc20 token trans
+        elif erc721:
+            self.url_dict[self.ACTION] = 'tokennfttx' # nfts
+        elif erc1155:
+            self.url_dict[self.ACTION] = 'token1155tx'  # nfts
         else:
+            # return 'no such category'
             self.url_dict[self.ACTION] = 'txlist'
         self.url_dict[self.PAGE] = str(page)
         self.url_dict[self.OFFSET] = str(offset)
@@ -147,12 +152,17 @@ class Account(Client):
                 print("page {} added".format(page_number[0]))
                 self.url_dict[self.PAGE] = str(int(page_number[0]) + 1)
 
-    def get_internal_by_hash(self, tx_hash=''):
+    def get_internal_by_hash(self, tx_hash:str):
         """
-        Currently not implemented
-        :return:
+     
         """
-        pass
+        self.url_dict[self.ACTION] = 'txlistinternal'
+        self.url_dict[self.TXHASH] = tx_hash
+        self.build_url()
+        req = self.connect()
+        return req['result']
+
+        
 
     def update_transactions(self, address, trans):
         """
