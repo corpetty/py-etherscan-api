@@ -36,6 +36,8 @@ Currently, only the following Etherscan.io API modules are available:
 - proxies
 - blocks
 - transactions
+- Logs
+- Gas Tracker
 
 The remaining available modules provided by Etherscan.io will be added eventually...
 
@@ -58,7 +60,6 @@ Jupyter notebooks area also included in each directory to show all examples
 
 - Package and submit to PyPI
 - Add the following modules:
-  - event logs
   - geth proxy
   - websockets
 - Add robust documentation
