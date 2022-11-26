@@ -104,6 +104,7 @@ class Client(object):
         self.url = self.PREFIX + ''.join(
             [param + val if val else '' for param, val in
              self.url_dict.items()])
+        # print(self.url)
 
     def connect(self):
         # TODO: deal with "unknown exception" error
